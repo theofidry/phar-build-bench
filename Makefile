@@ -11,6 +11,8 @@ SOURCE_URL = https://github.com/box-project/box/archive/refs/tags/4.6.2.tar.gz
 PHPBENCH_BIN = vendor/bin/phpbench
 PHPBENCH = php -d phar.readonly=0 $(PHPBENCH_BIN)
 
+default: bench
+
 .PHONY: clean
 clean:
 	rm -rf dist

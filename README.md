@@ -1,0 +1,4 @@
+```shell
+direnv allow
+make
+```
