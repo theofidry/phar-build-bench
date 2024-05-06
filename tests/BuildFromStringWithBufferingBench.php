@@ -24,7 +24,7 @@ use function unlink;
 use function var_dump;
 use const DIRECTORY_SEPARATOR;
 
-final class BuildFromStringBench
+final class BuildFromStringWithBufferingBench
 {
     private const string DEST_DIR = __DIR__ . '/../dist/build-from-dir';
     private const string SOURCE_DIR = __DIR__ . '/../dist/source';
@@ -63,9 +63,13 @@ final class BuildFromStringBench
     #[AfterMethods('tearDown')]
     public function bench(): void
     {
+        $this->phar->startBuffering();
+
         foreach ($this->files as [$fileName, $fileContents]) {
             $this->phar->addFromString($fileName, $fileContents);
         }
+
+        $this->phar->stopBuffering();
     }
 
     private static function assertXdebugIsDisabled(): void
